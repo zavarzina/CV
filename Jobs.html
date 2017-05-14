@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <Link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            list-style-type: none;
+        }
+
+        .slider{
+            width: 600px;
+            margin-top: 30px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slider__previews {
+            display: flex;
+            overflow: auto;
+        }
+
+        .slider__preview{
+            margin: 10px;
+            cursor: crosshair;
+        }
+
+        .slider__preview:first-child{
+            margin-left:0;
+        }
+
+        .slider__preview:last-child{
+            margin-right:0;
+        }
+
+        .slider__arrow{
+            width: 20px;
+            height: 20px;
+            top: 150px;
+            position: absolute;
+            transform: translateY(-50%);
+
+        }
+
+        .slider__arrow_left{
+            left: -40px;
+        }
+
+        .slider__arrow_right {
+            right: -40px;
+        }
+    </style>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+
+    </script>
+
+
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="header">
+        <br>
+        <h1> Опыт работы </h1>
+    </div>
+
+    <div class="content">
+
+        <div class="column column_pos_center">
+            <h2>Объединенная Вагонная Компания</h2>
+            <p> <i>09/2015 - н.время </i></p>
+            <br>
+            <p>Экономист</p>
+            <ul>
+                <li>Сформировала бизнес-план для нового продукта производства.</li>
+                <li>Оптимизировала через 1С сбор информации для моделирования.</li>
+                <li>Внедряла ERP-систему на предприятии, благодаря чему скорость внутренних процессов увеличилась в три раза.</li>
+                <li>Участвовала в подготовке предложений для иностранных покупаталей, были заключены 4 контракта.</li>
+                <li>Проводила ежемесячный анализ расходов и составляла отчеты для руководителей и инвесторов.</li>
+            </ul>
+            <br>
+            <br>
+            <h2>Объединенная Вагонная Компания</h2>
+            <p> <i>02/2014 - 08/2015 </i></p>
+            <br>
+            <p>Бухгалтер по МСФО</p>
+            <ul>
+                <li>Участвовала в составлении отчетности для выхода группы компаний на IPO.</li>
+                <li>Взаимодействовала с аудиторами Big4 в России и на Кипре.</li>
+                <li>Автоматизировала ведение учета оффшорных компаний, что сократило издержки на консультантов и уменьшило сроки составления отчетов.</li>
+                <li>Проводила трансформацию и консолидацию 30 компаний Группы для ежеквартальных отчетов.</li>
+                <li>Вела бухгалтерский учет 20 оффшорных компаний в соответствии с МСФО.</li>
+            </ul>
+
+        </div>
+
+        <div class="column column_pos_right">
+            <div class="slider">
+                <div class="slider__arrow slider__arrow_left"> <i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+                <div class="slider__arrow slider__arrow_right"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
+
+                <div class="slider__big-img">
+                    <img src="wagon1.jpg" alt="" class="slider__img" alt="" width="600"/>
+                </div>
+
+                <ul class="slider__previews">
+                    <li class="slider__preview">
+                        <img src="wagon1.jpg" class="slider__img" alt="" width="60"/>
+                    </li>
+                    <li class="slider__preview">
+                        <img src="wagon2.jpg" class="slider__img" alt="" width="60" />
+                    </li>
+                    <li class="slider__preview">
+                        <img src="wagon3.jpg" class="slider__img" alt="" width="60" />
+                    </li>
+                    <li class="slider__preview">
+                        <img src="wagon4.jpg" class="slider__img" alt="" width="60" />
+                    </li>
+                    <li class="slider__preview">
+                        <img src="wagon5.jpg" class="slider__img" alt="" width="60" />
+                    </li>
+                    <li class="slider__preview">
+                        <img src="wagon6.jpg" class="slider__img" alt="" width="60" />
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-buffer"></div>
+
+
+</div>
+
+<div class="footer">
+    <a class="button" href="mailto:zavarzina.valentina@gmail.com">Send me email</a>
+</div>
+
+
+<script>
+    var $bigImg = $('.slider__big-img .slider__img');
+    var $previews = $('.slider__previews');
+    var $preview = $previews.find('.slider__preview');
+    var $previewImg = $('.slider__preview .slider__img');
+
+    var currentIndex = 0;
+
+    $previewImg.on('click', function(){
+        var src = $(this).attr('src');
+
+        $bigImg.fadeOut(function(){
+            $bigImg.attr('src', src);
+        });
+        $bigImg.fadeIn();
+
+        currentIndex = $(this).closest('li').index();
+    });
+
+    $('.slider__arrow_right').on('click', function(){
+        if (currentIndex < ($previewImg.length -1)) {
+            var src = $previewImg.eq(currentIndex+1).attr('src');
+
+            $bigImg.fadeOut(function(){
+                $bigImg.attr('src', src);
+            });
+            $bigImg.fadeIn();
+
+            currentIndex++;
+        }
+    });
+
+
+    $('.slider__arrow_left').on('click', function(){
+        if (currentIndex > 0) {
+            var src = $previewImg.eq(currentIndex-1).attr('src');
+
+            $bigImg.fadeOut(function(){
+                $bigImg.attr('src', src);
+            });
+            $bigImg.fadeIn();
+
+            currentIndex--;
+        }
+    });
+</script>
+
+</body>
+</html>
